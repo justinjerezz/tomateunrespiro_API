@@ -66,6 +66,7 @@ async function updateUser(req, res) {
   if (req.files.avatar) {
     const imagePath = imagen.getFilePath(req.files.avatar);
     userData.avatar = imagePath;
+    console.log(userData.avatar);
   }
 
   User.findByIdAndUpdate({ _id: id }, userData, (error) => {
