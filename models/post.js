@@ -9,7 +9,9 @@ const PostSchema=mongoose.Schema({
         type:String,
         unique:true,
     },
+    city:String,
     create_at:Date,
+    idUserCreate:String,
 });
 
 PostSchema.plugin(mongoosePaginate);

@@ -9,7 +9,7 @@ function createPost(req, res) {
   post.miniature = imagePath;
   post.save((error, postStored) => {
     if (error) {
-      res.status(400).send({ msg: "Error al crear el post" });
+      res.status(400).send({ msg: "Ponga otro nombre de ruta web" });
     } else {
       res.status(201).send(postStored);
     }
@@ -17,6 +17,28 @@ function createPost(req, res) {
 }
 
 function getPosts(req, res) {
+  const { page = 1, limit = 10, idUser } = req.query;
+
+  const options = {
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sort: { create_at: "desc" },
+  };
+
+  Post.paginate(
+    { idUserCreate: idUser.toString() },
+    options,
+    (error, postStored) => {
+      if (error) {
+        res.status(400).send({ msg: "Error al obtener los post" });
+      } else {
+        res.status(200).send(postStored);
+      }
+    }
+  );
+}
+
+function getPostsPrincipal(req, res) {
   const { page = 1, limit = 10 } = req.query;
 
   const options = {
@@ -25,7 +47,8 @@ function getPosts(req, res) {
     sort: { create_at: "desc" },
   };
 
-  Post.paginate({}, options, (error, postStored) => {
+  Post.paginate({},options, (error, postStored) => {
+
     if (error) {
       res.status(400).send({ msg: "Error al obtener los post" });
     } else {
@@ -75,9 +98,7 @@ function getPost(req, res) {
     } else if (!postStored) {
       res.status(400).send({ msg: "El post no existe" });
     } else {
-      res
-        .status(200)
-        .send(postStored);
+      res.status(200).send(postStored);
     }
   });
 }
@@ -87,5 +108,6 @@ module.exports = {
   getPosts,
   updatePost,
   deletePost,
-  getPost
+  getPost,
+  getPostsPrincipal
 };

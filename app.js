@@ -12,7 +12,7 @@ const menuRoutes=require("./router/menu");
 const courseRoutes=require("./router/course");
 const postRoutes=require("./router/post")
 const newsletterRoutes=require("./router/newsletter");
-
+const rutasRoutes=require("./router/rutas");
 //Configure Body Parse
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -34,5 +34,6 @@ app.use(`/api/${API_VERSION}`,menuRoutes);
 app.use(`/api/${API_VERSION}`,courseRoutes);
 app.use(`/api/${API_VERSION}`,postRoutes);
 app.use(`/api/${API_VERSION}`,newsletterRoutes);
+app.use(`/api/${API_VERSION}`,rutasRoutes);
 
 module.exports=app;

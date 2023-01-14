@@ -64,6 +64,7 @@ function login(req, res) {
           res.status(401).send({ msg: "Usuario no activo" });
         } else {
           res.status(200).send({
+            idUser:userStore._id,
             access: jwt.createAccessToken(userStore),
             refresh: jwt.createRefreshToken(userStore),
           });

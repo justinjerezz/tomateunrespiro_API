@@ -8,6 +8,7 @@ const api=express.Router();
 
 api.post("/post",[md_atuh,md_upload],PostController.createPost);
 api.get("/post",PostController.getPosts); 
+api.get("/postprincipal",PostController.getPostsPrincipal); 
 api.patch("/post/:id",[md_atuh,md_upload],PostController.updatePost); 
 api.delete("/post/:id",md_atuh,PostController.deletePost); 
 api.get("/post/:path",PostController.getPost); 
