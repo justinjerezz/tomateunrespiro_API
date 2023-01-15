@@ -8,7 +8,7 @@ const md_upload=multyparty({uploadDir: "./uploads/avatar"});
 const api=express.Router();
 
 api.get("/user/me", md_auth ,UserController.getMe);
-api.get("/users", md_auth ,UserController.getUsers);
+api.get("/users", [md_auth,md_upload] ,UserController.getUsers);
 api.post("/user", [md_auth,md_upload] ,UserController.createUser);
 api.patch("/user/:id",[md_auth,md_upload],UserController.updateUser);
 api.delete("/user/:id",md_auth,UserController.deleteUser);
