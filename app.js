@@ -20,9 +20,8 @@ app.use(bodyParser.json());
 
 //Configure static folder
 
-app.use(express.static("uploads"));
-app.use(express.static("blog"));
-app.use(express.static("avatar"));
+app.use(express.static(__dirname + "uploads"));
+
 
 //Configure Header HTTP - CORS
 app.use(cors());
